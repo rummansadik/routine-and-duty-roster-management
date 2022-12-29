@@ -1,0 +1,55 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+{% block content %}
+
+<h1>Events</h1>
+<div class="create-new">
+  <a class="nav-link btn btn-success create-new-button"  href="{% url 'add-event' %}" >
+    Add Event
+  </a>
+</div>
+
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Events of the year {{ year }}</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 30%;">Name</th>
+                <th style="width: 15%;">Start Date</th>
+                <th style="width: 15%;">End Date</th>
+                <th style="width: 30%;">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for event in events %}
+                    <tr>
+                      <td>{{ event.name }}</td>
+                      <td>{{ event.start_date }}</td>
+                      <td>{{ event.end_date }}</td>
+                      <td>{{ event.notes }}</td>
+                      <td>
+                        <a class="nav-link btn btn-warning create-new-button"  href="{% url 'edit-event' %}" >
+                          Edit
+                        </a>
+                      </td>
+                      <td>
+                        <a class="nav-link btn btn-danger create-new-button"  href="{% url 'delete-event' event.id %}" >
+                          Delete
+                        </a>
+                      </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

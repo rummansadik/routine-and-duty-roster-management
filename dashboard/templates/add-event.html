@@ -1,0 +1,36 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Add Event</h4>
+            <form class="forms-sample" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="event_name">Event Name</label>
+                    <input type="text" class="form-control" id="event_name" name="name" placeholder="Event Name">
+                </div>
+                <div class="form-group">
+                    <label for="start_date">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date" placeholder="Start Date">
+                </div>
+                <div class="form-group">
+                    <label for="end_date">End Date</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date" placeholder="End Date">
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <input type="text" class="form-control" id="notes" name="notes" placeholder="Event Notes">
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button class="btn btn-dark">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+
+{% endblock content %}

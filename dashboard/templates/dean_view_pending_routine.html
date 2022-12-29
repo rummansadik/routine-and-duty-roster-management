@@ -1,0 +1,41 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row ">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Pending Routines</h4>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th> Routine Name </th>
+                  <th> Department Name </th>
+                  <th> Start Date </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for routine in routines %}
+                <tr>
+                  <td> {{routine.name}} </td>
+                  <td> {{routine.department}} </td>
+                  <td> {{routine.start_date}} </td>
+                  <td>
+                    <a class="btn btn-primary" href="{% url 'routine-view' routine.id  %}">View</a>
+                  </td>
+                  <td>
+                    <a class="btn btn-danger" href="{% url 'reject-routine' routine.id  %}">Reject</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+{% endblock content %}

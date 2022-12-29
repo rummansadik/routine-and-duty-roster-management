@@ -1,0 +1,14 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+{% block content %}
+
+<h1>Search Result</h1>
+{% if not data_found %}
+<h4>No data found!</h4>
+{% endif %}
+
+{% include 'search-exams.html' %}
+{% include 'search-courses.html' %}
+{% include 'search-teachers.html' %}
+
+{% endblock content %}

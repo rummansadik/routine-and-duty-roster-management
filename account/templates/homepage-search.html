@@ -1,0 +1,42 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'landing/style.css' %}">
+  <title>Examination System</title>
+</head>
+
+<body>
+  <header id="header-bar">
+    <a class="btn btn-info header-right sign-in-button" href="{% url 'login-page' %}">Sign In</a>
+  </header>
+
+  <div id="main">
+    <form class="search" method="post" action="{% url 'homepage-search' %}">
+      {% csrf_token %}
+      <div id="search-box-outer">
+        <input type="text" name="search" class="form-control search-box-inner" placeholder="Search events" />
+      </div>
+    </form>
+
+    <h1>Search Result</h1>
+    {% if not data_found %}
+    <h4>No data found!</h4>
+    {% endif %}
+
+    {% include 'search-exams.html' %}
+    {% include 'search-courses.html' %}
+    {% include 'search-teachers.html' %}
+  </div>
+  <footer id="footer-bar">
+  </footer>
+</body>
+
+</html>

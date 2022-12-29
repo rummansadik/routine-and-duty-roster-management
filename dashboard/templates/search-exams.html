@@ -1,0 +1,132 @@
+{% if current_exams or upcomming_exams or past_exams %}
+<h2>Exams</h2>
+{% endif %}
+
+<!-- Current Exams -->
+{% if current_exams %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Current Exams</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Exam Date</th>
+                <th>Exam Time</th>
+                <th>Room Number</th>
+                <th>Course Code</th>
+                <th>Supervisor</th>
+                <th>Examiners</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for exam in current_exams %}
+              <tr>
+                <td>{{ exam.exam_date }}</td>
+                <td>{{ exam.exam_time }}</td>
+                <td>{{ exam.room_number }}</td>
+                <td>{{ exam.course }}</td>
+                <td>{{ exam.supervisor }}</td>
+                <td>
+                  {% for teacher in exam.examiners.all %}
+                  <p> {{ teacher }} </p>
+                  {% endfor %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if upcomming_exams %}
+<!-- Upcomming Exams -->
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Upcomming Exams</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Exam Date</th>
+                <th>Exam Time</th>
+                <th>Room Number</th>
+                <th>Course Code</th>
+                <th>Supervisor</th>
+                <th>Examiners</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for exam in upcomming_exams %}
+              <tr>
+                <td>{{ exam.exam_date }}</td>
+                <td>{{ exam.exam_time }}</td>
+                <td>{{ exam.room_number }}</td>
+                <td>{{ exam.course }}</td>
+                <td>{{ exam.supervisor }}</td>
+                <td>
+                  {% for teacher in exam.examiners.all %}
+                  <p> {{ teacher }} </p>
+                  {% endfor %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if past_exams %}
+<!-- Past Exams -->
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Past Exams</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Exam Date</th>
+                <th>Exam Time</th>
+                <th>Room Number</th>
+                <th>Course Code</th>
+                <th>Supervisor</th>
+                <th>Examiners</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for exam in past_exams %}
+              <tr>
+                <td>{{ exam.exam_date }}</td>
+                <td>{{ exam.exam_time }}</td>
+                <td>{{ exam.room_number }}</td>
+                <td>{{ exam.course }}</td>
+                <td>{{ exam.supervisor }}</td>
+                <td>
+                  {% for teacher in exam.examiners.all %}
+                  <p> {{ teacher }} </p>
+                  {% endfor %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

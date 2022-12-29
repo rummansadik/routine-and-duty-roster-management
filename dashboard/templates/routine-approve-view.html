@@ -1,0 +1,47 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row ">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ routine_name }}</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th> Exam Date </th>
+                <th> Exam Time </th>
+                <th> Room No. </th>
+                <th> Course Code </th>
+                <th> Course Title </th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {% for exam in exams %}
+              <tr>
+                <td> {{exam.exam_date}} </td>
+                <td> {{exam.exam_time}} </td>
+                <td> {{exam.room_number}} </td>
+                <td> {{exam.course.code}} </td>
+                <td> {{exam.course.name}} </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <hr>
+          {% if is_staff %}
+          <a class="btn btn-primary" href="{% url 'approve-routine' routine_id %}">Approve</a>
+          <a class="btn btn-danger" href="{% url 'reject-routine' routine_id %}">Reject</a>
+          {% endif %}
+          <a class="btn btn-success" href="{% url 'download-routine' routine_name %}">Download Routine</a>
+          <a class="btn btn-success" href="#">Download Duty Roaster</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

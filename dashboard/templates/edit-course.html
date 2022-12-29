@@ -1,0 +1,44 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Edit Course</h4>
+            <form class="forms-sample" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="course_level">Level</label>
+                    <input type="text" class="form-control" id="course_level" name="course_level" placeholder="Level">
+                </div>
+                <div class="form-group">
+                    <label for="course_semester">Semester</label>
+                    <input type="text" class="form-control" id="course_semester" name="course_semester" placeholder="Semester">
+                </div>
+                <div class="form-group">
+                    <label for="course_code">Course Code</label>
+                    <input type="text" class="form-control" id="course_code" name="course_code" placeholder="Course Code">
+                </div>
+                <div class="form-group">
+                    <label for="course_title">Course Title</label>
+                    <input type="text" class="form-control" id="course_title" name="course_title" placeholder="Course Title">
+                </div>
+                <div class="form-group">
+                    <label for="course_credit">Course Credit</label>
+                    <input type="text" class="form-control" id="course_credit" name="course_credit" placeholder="Course Credit">
+                </div>
+                <div class="form-group">
+                    <label for="course_type">Course Type</label>
+                    <input type="text" class="form-control" id="course_type" name="course_type" placeholder="Course Type">
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button class="btn btn-dark">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+{% block content %}
+
+<h1>Course Section</h1>
+<div class="create-new">
+  <a class="nav-link btn btn-success create-new-button"  href="{% url 'add-course' %}" >
+    Add Course
+  </a>
+</div>
+
+<!-- Available Courses -->
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">{{ faculty.name }}</h4>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>level</th>
+                  <th>semester</th>
+                  <th>code</th>
+                  <th>name</th>
+                  <th>credits</th>
+                  <th>is_sessional</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for course in courses %}
+                  <tr>
+                    <td>{{ course.level }}</td>
+                    <td>{{ course.semester }}</td>
+                    <td>{{ course.code }}</td>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.level }}</td>
+                    <td>
+                      {% if course.is_sessional %}
+                        Sessional
+                      {% else %}
+                        Theory
+                      {% endif %}
+                    </td>
+                    <td>
+                      <a class="nav-link btn btn-warning create-new-button"  href="{% url 'edit-course' %}" >
+                        Edit
+                      </a>
+                    </td>
+                    <td>
+                      <a class="nav-link btn btn-danger create-new-button"  href="{% url 'delete-course' course.id %}" >
+                        Delete
+                      </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

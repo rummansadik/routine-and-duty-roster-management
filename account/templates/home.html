@@ -1,0 +1,49 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'landing/style.css' %}">
+    <title>Examination System</title>
+</head>
+
+<body>
+    <header id="header-bar">
+        <a class="btn btn-info header-right sign-in-button" href="{% url 'login-page' %}">Sign In</a>
+    </header>
+
+    <div id="main">
+        <img src="{% static 'images/hstu_logo_.jpg' %}" alt="HSTU logo" width="15%">
+
+        <br>
+
+        <form class="search" method="post" action="{% url 'homepage-search' %}">
+            {% csrf_token %}
+
+            <div id="search-box-outer">
+                <input type="text" name="search" class="form-control search-box-inner" placeholder="Search events" />
+                <span>
+                    <img class="mic" src="https://www.gstatic.com/images/branding/googlemic/2x/googlemic_color_24dp.png"
+                        alt="voice command button">
+                </span>
+            </div>
+
+            <br>
+
+            <div id="main-buttons-div">
+                <input type="submit" class="search-button" value="Search">
+            </div>
+        </form>
+    </div>
+
+    <footer id="footer-bar">
+    </footer>
+</body>
+
+</html>

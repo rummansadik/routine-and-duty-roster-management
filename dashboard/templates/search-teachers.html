@@ -1,0 +1,50 @@
+{% if teachers %}
+<h2>Teachers</h2>
+
+{% for department in departments %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ department.name }}</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for teacher in teachers %}
+              {% if department == teacher.department %}
+              <tr>
+                <td>{{ teacher.user.first_name }} {{ teacher.user.last_name }}</td>
+                <td>{{ teacher.title }}</td>
+                <td>{{ teacher.user }}</td>
+                <td>{{ teacher.contact_number }}</td>
+                <td>
+                  <a class="nav-link btn btn-warning create-new-button" href="{% url 'edit-teacher' %}">
+                    Edit
+                  </a>
+                </td>
+                <td>
+                  <a class="nav-link btn btn-danger create-new-button"
+                    href="{% url 'delete-teacher' teacher.user_id %}">
+                    Delete
+                  </a>
+                </td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endif %}

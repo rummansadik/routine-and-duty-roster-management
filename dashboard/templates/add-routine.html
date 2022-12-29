@@ -1,0 +1,65 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Automated Routine</h4>
+                <form class="forms-sample" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name" class="js-example-basic-single">Routine Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Routine Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select class="js-example-basic-single" name="dept" style="width:100%">
+                            {% for department in departments %}
+                            <option value="{{ department.name }}">{{ department.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Level</label>
+                        <select class="js-example-basic-single" name="level" style="width:100%">
+                            {% for level in levels %}
+                            <option value="{{ level }}">{{ level }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Semester</label>
+                        <select class="js-example-basic-single" name="semester" style="width:100%">
+                            {% for semester in semesters %}
+                            <option value="{{ semester }}">{{ semester }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Exam Type</label>
+                        <select class="js-example-basic-single" name="type" style="width:100%">
+                            {% for type in types %}
+                            <option value="{{ type }}">{{ type }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="num_students" class="js-example-basic-single">Enrolled Students</label>
+                        <input type="text" class="form-control" id="num_students" name="num_students" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="start_date">Start date:</label>
+                        <input type="date" id="start_date" name="start_date" value="" min="" max="">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-dark">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

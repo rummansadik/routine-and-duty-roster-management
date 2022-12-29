@@ -1,0 +1,280 @@
+{% extends "dashboard-base.html" %}
+{% load static %}
+{% block content %}
+
+<h1>Dashboard</h1>
+{% if is_student %}
+<!-- Routines -->
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Routines</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th> Routine Name </th>
+                <th> Department Name </th>
+                <th> Start Date </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for routine in approved_routines %}
+              <tr>
+                <td> {{routine.name}} </td>
+                <td> {{routine.department}} </td>
+                <td> {{routine.start_date}} </td>
+                {% if is_student %}
+                <td>
+                  <a class="btn btn-primary" href="{% url 'download-admit' routine.name  %}">Admit</a>
+                </td>
+                {% endif %}
+                <td>
+                  <a class="btn btn-primary" href="{% url 'routine-view' routine.id  %}">View</a>
+                </td>
+                <td>
+                  <a class="btn btn-success" href="{% url 'download-routine' routine.name %}">Download</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+
+
+{% if is_staff %}
+<div class="create-new">
+  <a class="nav-link btn btn-success create-new-button" href="{% url 'add-routine' %}">
+    Add Routine
+  </a>
+</div>
+{% if routines|length %}
+<div class="row ">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Pending Routines</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th> Routine Name </th>
+                <th> Department Name </th>
+                <th> Start Date </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for routine in routines %}
+              <tr>
+                <td> {{routine.name}} </td>
+                <td> {{routine.department}} </td>
+                <td> {{routine.start_date}} </td>
+                <td>
+                  <a class="btn btn-success" href="{% url 'routine-approve-view' routine.id  %}">View</a>
+                </td>
+                <td>
+                  <a class="btn btn-danger" href="{% url 'reject-routine' routine.id  %}">Reject</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Routines -->
+{% if approved_routines|length %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Routines</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th> Routine Name </th>
+                <th> Department Name </th>
+                <th> Start Date </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for routine in approved_routines %}
+              <tr>
+                <td> {{routine.name}} </td>
+                <td> {{routine.department}} </td>
+                <td> {{routine.start_date}} </td>
+                <td>
+                  <a class="btn btn-primary" href="{% url 'routine-view' routine.id  %}">View</a>
+                </td>
+                <td>
+                  <a class="btn btn-success" href="{% url 'download-roaster' routine.name %}">Download Roaster</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% else %}
+<!-- Current Exams -->
+{% if current_exams|length %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Current Exams</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Exam Date</th>
+                <th>Exam Time</th>
+                <th>Room Number</th>
+                <th>Course Code</th>
+                <th>Supervisor</th>
+                <th>Examiners</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for exam in current_exams %}
+              <tr>
+                <td>{{ exam.exam_date }}</td>
+                <td>{{ exam.exam_time }}</td>
+                <td>{{ exam.room_number }}</td>
+                <td>{{ exam.course }}</td>
+                <td>{{ exam.supervisor }}</td>
+                <td>
+                  {% for teacher in exam.examiners.all %}
+                  <p> {{ teacher }} </p>
+                  {% endfor %}
+                </td>
+                <td>
+                  <a class="btn btn-success" href="{% url 'download-roaster' exam.routine.name %}">Download Roaster</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Upcomming Exams -->
+{% if upcomming_exams|length %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Upcomming Exams</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Exam Date</th>
+                <th>Exam Time</th>
+                <th>Room Number</th>
+                <th>Course Code</th>
+                <th>Supervisor</th>
+                <th>Examiners</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for exam in upcomming_exams %}
+              <tr>
+                <td>{{ exam.exam_date }}</td>
+                <td>{{ exam.exam_time }}</td>
+                <td>{{ exam.room_number }}</td>
+                <td>{{ exam.course }}</td>
+                <td>{{ exam.supervisor }}</td>
+                <td>
+                  {% for teacher in exam.examiners.all %}
+                  <p> {{ teacher }} </p>
+                  {% endfor %}
+                </td>
+                <td>
+                  <a class="btn btn-success" href="{% url 'download-roaster' exam.routine.name %}">Download Roaster</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Past Exams -->
+{% if past_exams|length %}
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Past Exams</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Exam Date</th>
+                <th>Exam Time</th>
+                <th>Room Number</th>
+                <th>Course Code</th>
+                <th>Supervisor</th>
+                <th>Examiners</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for exam in past_exams %}
+              <tr>
+                <td>{{ exam.exam_date }}</td>
+                <td>{{ exam.exam_time }}</td>
+                <td>{{ exam.room_number }}</td>
+                <td>{{ exam.course }}</td>
+                <td>{{ exam.supervisor }}</td>
+                <td>
+                  {% for teacher in exam.examiners.all %}
+                  <p> {{ teacher }} </p>
+                  {% endfor %}
+                </td>
+                <td>
+                  {% if is_student%}
+                  <a class="btn btn-success" href="{% url 'download-routine'  exam.routine.name %}">Download Routine</a>
+                  {% else %}
+                  <a class="btn btn-success" href="{% url 'download-roaster' exam.routine.name %}">Download Roaster</a>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endif %}
+{% endif %}
+
+{% endblock content %}
